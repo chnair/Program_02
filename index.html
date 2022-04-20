@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #dark{
+      position: absolute;
+      bottom: 2px;
+      left: 10px;
+      /*animation: vibrate 0.3s linear infinite both;*/
+    }
+    #light{
+      position: absolute;
+      bottom: 24px;
+      left: 10px;
+      /*animation: vibrate 0.3s linear infinite both;*/
+    }
+  </style>
+<!--  <link rel="stylesheet" href="style2.css" id="ligth">-->
+<!--  <link rel="stylesheet" href="style.css" id="dark">-->
+  <link rel="stylesheet" href="style.css" id="themes">
+</head>
+<body>
+<div id="app">
+<button id='dark' @click="toDark()">DarkMode</button>
+<button id="light" @click="toLight()">LightMode</button>
+</div>
+<div class="clock">
+  <div class="hour">
+    <div class="hr" id="hr"></div>
+  </div>
+  <div class="minute">
+    <div class="min" id="min"></div>
+  </div>
+  <div class="second">
+    <div class="sec" id="sec"></div>
+  </div>
+</div>
+
+<script>
+  setInterval(()=>{
+  const deg = 6;
+  const hr = document.querySelector('#hr');
+  const min = document.querySelector('#min');
+  const sec = document.querySelector('#sec');
+
+  let day = new Date()
+  let hh = day.getHours() * 30;
+  let mm = day.getMinutes() * deg;
+  let ss = day.getSeconds() * deg;
+
+  hr.style.transform = `rotateZ(${(hh) + (mm / 12)}deg)`;
+  min.style.transform = `rotateZ(${mm}deg)`;
+  sec.style.transform = `rotateZ(${ss}deg)`;
+  })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    methods:{
+      toDark(){
+        document.getElementById('themes').href='style.css';
+      },
+      toLight(){
+        document.getElementById('themes').href='style2.css';
+      }
+    }
+  })
+</script>
+</body>
+</html>
